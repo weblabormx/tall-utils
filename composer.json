@@ -15,7 +15,8 @@
         }
     ],
     "require": {
-        "wireui/wireui": "^1.17"
+        "wireui/wireui": "^1.17",
+        "illuminate/support": ">=8.0"
     },
     "extra": {
         "laravel": {
