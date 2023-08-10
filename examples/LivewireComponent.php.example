@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Eloquent\Model;
+use Livewire\Component;
+use WeblaborMx\TallUtils\Livewire\WithFilters;
+
+class LivewireComponent extends Component
+{
+    use WithFilters; // Optional utility trait
+
+    public $filters_keys = [
+        'name',
+        'user_id',
+        'in_team_id',
+        'scope_Active'
+    ];
+
+    public $data;
+
+    public function search()
+    {
+        $this->filters = [
+            'name' => 'José',
+            'user_id' => 1,
+            'in_team_id' => [1, 2],
+            'scope_Active' => 1,
+        ];
+    }
+
+    public function render()
+    {
+        $this->data = Model::filterByArray($this->filters)->get();
+
+        return view('example-livewire-component');
+    }
+}

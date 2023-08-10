@@ -1,0 +1,28 @@
+{
+    "name": "weblabormx/tall-utils",
+    "autoload": {
+        "psr-4": {
+            "WeblaborMx\\TallUtils\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Carlos Escobar",
+            "email": "carlosescobar@weblabor.mx"
+        }
+    ],
+    "require": {
+        "wireui/wireui": "^1.17"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WeblaborMx\\TallUtils\\Providers\\TallUtilsServiceProvider"
+            ],
+            "aliases": []
+        }
+    }
+}
