@@ -23,6 +23,9 @@
             "providers": [
                 "WeblaborMx\\TallUtils\\Providers\\TallUtilsServiceProvider"
             ],
+            "dont-discover": [
+                "wireui/wireui"
+            ],
             "aliases": []
         }
     }

@@ -1,29 +1,22 @@
 <?php
 
 if (!function_exists('notify')) {
-    function notify(string $title, string $description = "", string $type = "success"): ?\WireUi\Actions\Notification
+    function notify(string $title, string $description = "", string $type = "success")
     {
-        if (!\Livewire\Livewire::isLivewireRequest()) {
-            return null;
-        }
-
-        $request = new \Livewire\Request(request()->all());
-
-        $notification = new \WireUi\Actions\Notification(\Livewire::getInstance($request->name(), $request->id()));
-
-        return $notification->send([
+        $notifications = session()->get('wireui:notifications', []);
+        $notifications[] = [
             "title" => $title,
             "description" => $description,
             "icon" => $type
-        ]);
+        ];
+
+        session()->flash('wireui:notifications', $notifications);
     }
 }
 
 if (!function_exists('dialog')) {
-    function dialog(array $options = []): \WireUi\Actions\Dialog
+    function dialog(array $options = [])
     {
-        $dialog = new \WireUi\Actions\Dialog();
-
-        return $dialog->show($options);
+        session()->flash('wireui:dialog', $options);
     }
 }
