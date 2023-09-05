@@ -1,7 +1,18 @@
 <?php
 
 if (!function_exists('notify')) {
-    function notify(string $title, string $description = "", string $type = "success")
+    /**
+     * Queues a notification to show on the next request
+     *
+     * @param string $title
+     * @param string $description
+     * @param string $type
+     * @return array[] The array of notifications on queue
+     * 
+     * @see \WireUi\Actions\Actionable
+     * @see https://livewire-wireui.com/docs/notifications
+     */
+    function notify(string $title, string $description = "", string $type = "success"): array
     {
         $notifications = session()->get('wireui:notifications', []);
         $notifications[] = [
@@ -11,10 +22,20 @@ if (!function_exists('notify')) {
         ];
 
         session()->flash('wireui:notifications', $notifications);
+
+        return $notifications;
     }
 }
 
 if (!function_exists('dialog')) {
+    /**
+     * Queues a dialog to be shown on the next request
+     *
+     * @param array $options
+     * @return void
+     * 
+     * @see https://livewire-wireui.com/docs/dialogs
+     */
     function dialog(array $options = [])
     {
         session()->flash('wireui:dialog', $options);
