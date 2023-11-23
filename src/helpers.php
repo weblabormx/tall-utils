@@ -41,3 +41,26 @@ if (!function_exists('dialog')) {
         session()->flash('wireui:dialog', $options);
     }
 }
+
+if (!function_exists('enum')) {
+    function enum(string $type, mixed $case = null): string|BackedEnum
+    {
+        $type = trim($type, "\\");
+
+        if (!str_ends_with($type, 'Enum')) {
+            $type .= 'Enum';
+        }
+
+        if (!str_starts_with($type, 'App\\Enums\\')) {
+            $type = "App\\Enums\\{$type}";
+        }
+
+        throw_unless(enum_exists($type), new RuntimeException("Enum of type $type doesn't exists"));
+
+        if (is_null($case)) {
+            return $type;
+        }
+
+        return $type::from($case);
+    }
+}
