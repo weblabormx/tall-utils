@@ -32,6 +32,7 @@ class CommaList implements
     {
         if (is_null($value)) {
             $this->value = collect();
+            return;
         }
 
         if (is_string($value)) {
