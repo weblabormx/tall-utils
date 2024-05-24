@@ -19,6 +19,7 @@ trait WithActivityLog
         $dontLog = ['updated_at', ...($this?->dont_log ?? [])];
 
         return LogOptions::defaults()
+            ->logUnguarded()
             ->dontLogIfAttributesChangedOnly($dontLog)
             ->logExcept($dontLog)
             ->logOnlyDirty()
