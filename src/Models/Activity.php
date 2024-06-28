@@ -50,7 +50,7 @@ class Activity extends Model
     {
         $changes = $this->onlyChanges();
         $new_return = collect();
-        collect($changes['old'] ?? null)->merge($changes['attributes'])->keys()->values()->mapWithKeys(function ($item) use ($changes) {
+        collect($changes['old'] ?? null)->merge($changes['attributes'] ?? [])->keys()->values()->mapWithKeys(function ($item) use ($changes) {
             return [$item => [
                 'old' => $changes['old'][$item] ?? null,
                 'new' => $changes['attributes'][$item] ?? null,
@@ -105,6 +105,12 @@ class Activity extends Model
         return $changes->filter(function ($item, $key) {
             return $key != 'updated_at';
         })->map(function ($item, $key) {
+            if(is_array($item['old'])) {
+                $item['old'] = json_encode($item['old']);
+            }
+            if(is_array($item['new'])) {
+                $item['new'] = json_encode($item['new']);
+            }
             return $key.' ('.($item['old'] ?? 'empty').' to '.($item['new'] ?? 'empty').')';
         })->implode(', ');
     }
