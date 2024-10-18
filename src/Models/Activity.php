@@ -49,38 +49,14 @@ class Activity extends Model
     public function changesByField(): Collection
     {
         $changes = $this->onlyChanges();
-        $new_return = collect();
-        collect($changes['old'] ?? null)->merge($changes['attributes'] ?? [])->keys()->values()->mapWithKeys(function ($item) use ($changes) {
+        $changes['old'] = collect($changes['old'] ?? [])->dot();
+        $changes['attributes'] = collect($changes['attributes'] ?? [])->dot();
+        return collect($changes['old'])->merge($changes['attributes'])->keys()->values()->mapWithKeys(function ($item) use ($changes) {
             return [$item => [
                 'old' => $changes['old'][$item] ?? null,
                 'new' => $changes['attributes'][$item] ?? null,
             ]];
-        })->each(function ($item, $key) use (&$new_return) {
-            if (is_array($item['old']) && is_array($item['new'])) {
-                $new['old'] = collect($item['old'])->mdiff($item['new'])->dot();
-                $new['new'] = collect($item['new'])->mdiff($item['old'])->dot();
-                foreach ($new['old'] as $key2 => $old) {
-                    $new_return[$key.'.'.$key2] = [
-                        'old' => $old,
-                        'new' => $new['new'][$key2],
-                    ];
-                }
-                foreach ($new['new'] as $key2 => $new_value) {
-                    if (isset($new_return[$key.'.'.$key2])) {
-                        continue;
-                    }
-                    $new_return[$key.'.'.$key2] = [
-                        'old' => $new['old'][$key2],
-                        'new' => $new_value,
-                    ];
-                }
-
-                return;
-            }
-            $new_return[$key] = $item;
         });
-
-        return $new_return;
     }
 
     public function getTextAttribute(): string
