@@ -19,7 +19,7 @@
         }
     ],
     "require": {
-        "wireui/wireui": ">=1.17",
+        "wireui/wireui": "^2.0",
         "illuminate/support": ">=8.0"
     },
     "extra": {
@@ -27,9 +27,7 @@
             "providers": [
                 "WeblaborMx\\TallUtils\\Providers\\TallUtilsServiceProvider"
             ],
-            "dont-discover": [
-                "wireui/wireui"
-            ],
+            "dont-discover": [],
             "aliases": []
         }
     }
