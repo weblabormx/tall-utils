@@ -3,21 +3,16 @@
 namespace WeblaborMx\TallUtils\Providers;
 
 use Illuminate\Support\Facades\Blade;
-use WireUi\Providers\WireUiServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-class TallUtilsServiceProvider extends WireUiServiceProvider
+class TallUtilsServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        parent::register();
-
-        app()->instance(WireUiServiceProvider::class, null);
         require_once __DIR__ . '/../helpers.php';
     }
     public function boot()
     {
-        parent::boot();
-
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'tall-utils');
 
         Blade::directive('wireUiScripts', static function (?string $attributes = '') {
