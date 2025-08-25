@@ -3,7 +3,6 @@
 namespace WeblaborMx\TallUtils\Classes;
 
 use ArrayAccess;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Collection;
 use JsonSerializable;
