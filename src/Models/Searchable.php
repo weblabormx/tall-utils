@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace WeblaborMx\TallUtils\Models;
 
 use Illuminate\Support\Facades\Schema;
 
