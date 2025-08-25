@@ -12,8 +12,8 @@ trait HasSlug
 {
     use HasSlugTrait;
 
-    public $slugField = 'title';
-    public $slugTo = 'slug';
+    protected $slugField = 'title';
+    protected $slugTo = 'slug';
 
     public function getSlugOptions(): SlugOptions
     {
