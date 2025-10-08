@@ -8,6 +8,10 @@ use Spatie\Activitylog\Models\Activity as Model;
 
 class Activity extends Model
 {
+    use Searchable;
+
+    public $searchable = ['description', 'subject_type', 'causer_type', 'properties', 'id', 'event'];
+
     /*
      * Functions
      */
@@ -40,7 +44,6 @@ class Activity extends Model
                 if (is_string($item)) {
                     return json_decode($item, true);
                 }
-
                 return $item;
             });
         });
@@ -64,7 +67,6 @@ class Activity extends Model
         if ($this->description == 'updated') {
             return 'The object was updated';
         }
-
         return $this->description;
     }
 
